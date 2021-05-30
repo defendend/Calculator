@@ -3,6 +3,7 @@ package com.defendend.calculator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 
 private const val ONE: Int = 1
@@ -11,7 +12,12 @@ class MainActivity : AppCompatActivity() {
 
     private val numberOne = PrintFirstNumber()
     private val numberTwo = PrintSecondNumber()
+    private val calculate = Calculate()
     private var operation: Boolean = false
+    private var resultString: String=""
+    private var equalls: Boolean=false
+    private val chars: Array<Char> = arrayOf(' ', '+', '-', '÷', '*', '%','=')
+    private var charNumber: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +30,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun displayExpression() {
         val expression = findViewById<TextView>(R.id.expression_text)
-        expression.text = numberOne.firstNumber + " " + numberTwo.secondNumber
+        expression.text = numberOne.firstNumber + chars[charNumber] + numberTwo.secondNumber
+        if (equalls){
+            expression.text = numberOne.firstNumber + chars[charNumber] + numberTwo.secondNumber + chars[6]
+        }
     }
 
     fun nine(view: View) {
+        if (numberOne.firstNumber.substring(0) == "0" && !numberOne.thereIsAPoint ){
+            delete(view)
+        }
         if (!operation) {
             numberOne.addNum(getString(R.string.nine))
         } else {
@@ -37,6 +49,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun eight(view: View) {
+        if (numberOne.firstNumber.substring(0) == "0" && !numberOne.thereIsAPoint ){
+            delete(view)
+        }
         if (!operation) {
             numberOne.addNum(getString(R.string.eight))
         } else {
@@ -46,6 +61,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun seven(view: View) {
+        if (numberOne.firstNumber.substring(0) == "0" && !numberOne.thereIsAPoint ){
+            delete(view)
+        }
         if (!operation) {
             numberOne.addNum(getString(R.string.seven))
         } else {
@@ -55,6 +73,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun six(view: View) {
+        if (numberOne.firstNumber.substring(0) == "0" && !numberOne.thereIsAPoint ){
+            delete(view)
+        }
         if (!operation) {
             numberOne.addNum(getString(R.string.six))
         } else {
@@ -64,6 +85,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun five(view: View) {
+        if (numberOne.firstNumber.substring(0) == "0" && !numberOne.thereIsAPoint ){
+            delete(view)
+        }
         if (!operation) {
             numberOne.addNum(getString(R.string.five))
         } else {
@@ -73,6 +97,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun four(view: View) {
+        if (numberOne.firstNumber.substring(0) == "0" && !numberOne.thereIsAPoint ){
+            delete(view)
+        }
         if (!operation) {
             numberOne.addNum(getString(R.string.four))
         } else {
@@ -82,6 +109,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun three(view: View) {
+        if (numberOne.firstNumber.substring(0) == "0" && !numberOne.thereIsAPoint ){
+            delete(view)
+        }
         if (!operation) {
             numberOne.addNum(getString(R.string.three))
         } else {
@@ -91,6 +121,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun two(view: View) {
+        if (numberOne.firstNumber.substring(0) == "0" && !numberOne.thereIsAPoint ){
+            delete(view)
+        }
         if (!operation) {
             numberOne.addNum(getString(R.string.two))
         } else {
@@ -100,6 +133,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun one(view: View) {
+        if (numberOne.firstNumber.substring(0) == "0" && !numberOne.thereIsAPoint ){
+            delete(view)
+        }
         if (!operation) {
             numberOne.addNum(getString(R.string.one))
         } else {
@@ -110,18 +146,26 @@ class MainActivity : AppCompatActivity() {
 
     fun zero(view: View) {
         if (!operation) {
-            numberOne.addNum(getString(R.string.zero))
+            if (numberOne.firstNumber.substring(0) != "0") {
+                numberOne.addNum(getString(R.string.zero))
+            }
         } else {
-            numberTwo.addNum(getString(R.string.zero))
+            if (numberTwo.secondNumber.substring(0) != "0") {
+                numberTwo.addNum(getString(R.string.zero))
+            }
         }
         display()
     }
 
     fun doubleZero(view: View) {
         if (!operation) {
-            numberOne.addNum(getString(R.string.double_zero))
+            if (numberOne.firstNumber.substring(0) != "0") {
+                numberOne.addNum(getString(R.string.double_zero))
+            }
         } else {
-            numberTwo.addNum(getString(R.string.double_zero))
+            if (numberTwo.secondNumber.substring(0) != "0") {
+                numberTwo.addNum(getString(R.string.double_zero))
+            }
         }
         display()
     }
@@ -129,13 +173,25 @@ class MainActivity : AppCompatActivity() {
     fun point(view: View) {
         if (!operation) {
             if (!numberOne.thereIsAPoint) {
-                numberOne.addNum(getString(R.string.point))
-                numberOne.thereIsAPoint = true
+                if (numberOne.firstNumber.isEmpty()){
+                    numberOne.addNum(getString(R.string.zero))
+                    numberOne.addNum(getString(R.string.point))
+                    numberOne.thereIsAPoint = true
+                }else {
+                    numberOne.addNum(getString(R.string.point))
+                    numberOne.thereIsAPoint = true
+                }
             }
         } else {
             if (!numberTwo.thereIsAPoint) {
-                numberTwo.addNum(getString(R.string.point))
-                numberTwo.thereIsAPoint = true
+                if (numberTwo.secondNumber.isEmpty()){
+                    numberTwo.addNum(getString(R.string.zero))
+                    numberTwo.addNum(getString(R.string.point))
+                    numberTwo.thereIsAPoint = true
+                }else {
+                    numberTwo.addNum(getString(R.string.point))
+                    numberTwo.thereIsAPoint = true
+                }
             }
         }
         display()
@@ -155,40 +211,80 @@ class MainActivity : AppCompatActivity() {
                     numberTwo.thereIsAPoint = false
                 }
                 numberTwo.secondNumber = numberTwo.secondNumber.dropLast(ONE)
+            } else {
+                operation = false
+                charNumber = 0
             }
         }
         display()
     }
 
     fun result(view: View) {
+        equalls = true
         val result = findViewById<TextView>(R.id.result_text)
-        numberOne.numDouble()
-        numberTwo.numDouble()
-        result.text = (numberOne.num1).toString()
+        resultString = calculate.calculate(numberOne.numDouble(), numberTwo.numDouble(), charNumber)
+        result.text = resultString
+        displayExpression()
+        numberOne.firstNumber = resultString
+        charNumber = 0
+        equalls = false
+        operation = false
+        numberTwo.secondNumber = ""
     }
 
-    fun plusNum(view: View){
+    fun plusNum(view: View) {
+        if (numberTwo.secondNumber.isEmpty()) {
+            charNumber = 1
+            operation = true
+            display()
+        }
+    }
+
+    fun minusNum(view: View) {
+        if (numberTwo.secondNumber.isEmpty()) {
+            charNumber = 2
+            operation = true
+            display()
+        }
+    }
+
+
+    fun division(view: View) {
+        if (numberTwo.secondNumber.isEmpty()) {
+            charNumber = 3
+            operation = true
+            display()
+        }
+    }
+
+    fun multiplication(view: View) {
+        if (numberTwo.secondNumber.isEmpty()) {
+            charNumber = 4
+            operation = true
+            display()
+        }
 
     }
 
-    fun minusNum(view: View){
-
+    fun percent(view: View) {
+        if (numberTwo.secondNumber.isEmpty()) {
+            charNumber = 5
+            operation = true
+            result(view)
+        }
     }
 
-    fun percent(view: View){
-
-    }
-
-    fun division(view: View){
-
-    }
-
-    fun multiplication(view: View){
-
-    }
-
-    fun clear(view: View){
-
+    fun clear(view: View) {
+        operation = false
+        numberOne.firstNumber = ""
+        numberOne.thereIsAPoint = false
+        numberTwo.secondNumber = ""
+        numberTwo.thereIsAPoint = false
+        val result = findViewById<TextView>(R.id.result_text)
+        result.text = "0"
+        val expression = findViewById<TextView>(R.id.expression_text)
+        expression.text = "0"
+        display()
     }
 
 

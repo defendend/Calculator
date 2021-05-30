@@ -288,6 +288,7 @@
                 android:onClick="point"/>
 
             <Button
+                android:id="@+id/result_but"
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
