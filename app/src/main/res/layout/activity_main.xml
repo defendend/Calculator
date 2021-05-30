@@ -84,7 +84,8 @@
                 android:text="@string/clear"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:textSize="@dimen/textSize" />
+                android:textSize="@dimen/textSize"
+                android:onClick="clear"/>
 
             <Button
                 android:layout_width="1dp"
@@ -92,7 +93,8 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/blue_but"
                 android:text="@string/percent"
-                android:textSize="@dimen/textSize" />
+                android:textSize="@dimen/textSize"
+                android:onClick="percent"/>
 
             <Button
                 android:layout_width="1dp"
@@ -100,7 +102,8 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/blue_but"
                 android:text="@string/division"
-                android:textSize="@dimen/textSize" />
+                android:textSize="@dimen/textSize"
+                android:onClick="division"/>
 
 
         </LinearLayout>
@@ -149,7 +152,8 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/blue_but"
                 android:text="@string/multiply"
-                android:textSize="@dimen/textSize" />
+                android:textSize="@dimen/textSize"
+                android:onClick="multiplication"/>
         </LinearLayout>
 
         <LinearLayout
@@ -195,7 +199,8 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/blue_but"
                 android:text="@string/minus"
-                android:textSize="@dimen/textSize" />
+                android:textSize="@dimen/textSize"
+                android:onClick="minusNum"/>
         </LinearLayout>
 
         <LinearLayout
@@ -241,7 +246,8 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/blue_but"
                 android:text="@string/plus"
-                android:textSize="@dimen/textSize" />
+                android:textSize="@dimen/textSize"
+                android:onClick="plusNum"/>
         </LinearLayout>
 
         <LinearLayout

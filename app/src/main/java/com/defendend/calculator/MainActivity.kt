@@ -164,7 +164,32 @@ class MainActivity : AppCompatActivity() {
         val result = findViewById<TextView>(R.id.result_text)
         numberOne.numDouble()
         numberTwo.numDouble()
-        result.text = ""
+        result.text = (numberOne.num1).toString()
     }
+
+    fun plusNum(view: View){
+
+    }
+
+    fun minusNum(view: View){
+
+    }
+
+    fun percent(view: View){
+
+    }
+
+    fun division(view: View){
+
+    }
+
+    fun multiplication(view: View){
+
+    }
+
+    fun clear(view: View){
+
+    }
+
 
 }

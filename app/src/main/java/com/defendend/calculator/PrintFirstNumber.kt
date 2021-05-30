@@ -3,7 +3,7 @@ package com.defendend.calculator
 class PrintFirstNumber {
 
     var firstNumber: String = ""
-    var num1: Double = 0.0
+    var num1: Double? = 0.0
 
     var thereIsAPoint: Boolean = false
 
@@ -13,6 +13,6 @@ class PrintFirstNumber {
     }
 
     fun numDouble(){
-        num1 = firstNumber.toDouble()
+        num1 = firstNumber.toDoubleOrNull()
     }
 }
