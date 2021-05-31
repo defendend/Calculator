@@ -158,6 +158,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun doubleZero(view: View) {
+        if (numberOne.firstNumber.isEmpty()){
+            numberOne.firstNumber = "0"
+        }
         if (!operation) {
             if (numberOne.firstNumber.substring(0) != "0") {
                 numberOne.addNum(getString(R.string.double_zero))
