@@ -10,13 +10,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0dp"
         android:layout_weight="3"
         android:orientation="vertical">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0dp"
             android:layout_weight="1">
 
             <TextView
@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/spacing_big"
                 android:text="@string/zero"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/textSize_24sp" />
@@ -33,7 +33,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0dp"
             android:layout_weight="1">
 
             <TextView
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toStartOf="@id/image_button"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/spacing_big"
                 android:text="@string/zero"
                 android:textColor="@color/gray"
                 android:textSize="@dimen/textSize" />
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/gray"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="@dimen/spacing_big"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:src="@android:drawable/ic_input_delete"
@@ -65,19 +65,19 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0dp"
         android:layout_weight="7"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/first_row_LL"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:backgroundTint="@color/blue_but"
@@ -88,7 +88,7 @@
                 android:onClick="clear"/>
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/blue_but"
@@ -97,7 +97,7 @@
                 android:onClick="percent"/>
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/blue_but"
@@ -111,12 +111,12 @@
         <LinearLayout
             android:id="@+id/second_row_LL"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -126,7 +126,7 @@
                 android:onClick="seven"/>
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -136,7 +136,7 @@
                 android:onClick="eight"/>
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -147,7 +147,7 @@
 
             <Button
 
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/blue_but"
@@ -159,12 +159,12 @@
         <LinearLayout
             android:id="@+id/third_row_LL"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -174,7 +174,7 @@
                 android:onClick="four"/>
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -184,7 +184,7 @@
                 android:onClick="five"/>
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -194,7 +194,7 @@
                 android:onClick="six"/>
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/blue_but"
@@ -206,12 +206,12 @@
         <LinearLayout
             android:id="@+id/fourth_row_LL"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -221,7 +221,7 @@
                 android:onClick="one"/>
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -231,7 +231,7 @@
                 android:onClick="two"/>
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -241,7 +241,7 @@
                 android:onClick="three"/>
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/blue_but"
@@ -253,12 +253,12 @@
         <LinearLayout
             android:id="@+id/fifth_row_LL"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -268,7 +268,7 @@
                 android:onClick="zero"/>
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -278,7 +278,7 @@
                 android:onClick="doubleZero"/>
 
             <Button
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/white"
@@ -289,7 +289,7 @@
 
             <Button
                 android:id="@+id/result_but"
-                android:layout_width="1dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="@color/blue_but"
