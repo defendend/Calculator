@@ -12,110 +12,110 @@ private const val EQ_CHAR = '='
 
 class MainActivity : AppCompatActivity() {
 
-    private var modelView = MainViewModel()
+    private var modelView: MainViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         modelView = ViewModelProvider(this).get(MainViewModel::class.java)
-        display()
+        initObserves()
     }
 
 
-    private fun display() {
+    private fun initObserves() {
         val expression = findViewById<TextView>(R.id.expression_text)
         val result = findViewById<TextView>(R.id.result_text)
-        modelView.expression.observe(this, Observer {
+        modelView?.expression?.observe(this, Observer {
             expression.text = it
         })
 
-        modelView.result.observe(this, Observer {
+        modelView?.result?.observe(this, Observer {
             result.text = it
         })
 
     }
 
     fun nine(view: View) {
-        modelView.nine()
+        modelView?.nine()
     }
 
     fun eight(view: View) {
-        modelView.eight()
+        modelView?.eight()
     }
 
     fun seven(view: View) {
-        modelView.seven()
+        modelView?.seven()
     }
 
     fun six(view: View) {
-        modelView.six()
+        modelView?.six()
     }
 
     fun five(view: View) {
-        modelView.five()
+        modelView?.five()
     }
 
     fun four(view: View) {
-        modelView.four()
+        modelView?.four()
     }
 
     fun three(view: View) {
-        modelView.three()
+        modelView?.three()
     }
 
     fun two(view: View) {
-        modelView.two()
+        modelView?.two()
     }
 
     fun one(view: View) {
-        modelView.one()
+        modelView?.one()
     }
 
     fun zero(view: View) {
-        modelView.zero()
+        modelView?.zero()
     }
 
     fun doubleZero(view: View) {
-        modelView.doubleZero()
+        modelView?.doubleZero()
     }
 
     fun point(view: View) {
-        modelView.point()
+        modelView?.point()
     }
 
     fun delete(view: View) {
-        modelView.delete()
+        modelView?.delete()
     }
 
     fun result(view: View) {
-        modelView.result()
+        modelView?.result()
     }
 
 
     fun plusNum(view: View) {
-        modelView.plusNum()
+        modelView?.plusNum()
     }
 
     fun minusNum(view: View) {
-        modelView.minusNum()
+        modelView?.minusNum()
     }
 
 
     fun division(view: View) {
-        modelView.division()
+        modelView?.division()
     }
 
     fun multiplication(view: View) {
-        modelView.multiplication()
+        modelView?.multiplication()
     }
 
     fun percent(view: View) {
-        modelView.percent()
+        modelView?.percent()
         result(view)
     }
 
     fun clear(view: View) {
-        modelView.clear()
+        modelView?.clear()
     }
 
 
