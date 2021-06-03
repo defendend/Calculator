@@ -12,17 +12,13 @@ private const val EQ_CHAR = '='
 
 class MainActivity : AppCompatActivity() {
 
-
     private var modelView = MainViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         modelView = ViewModelProvider(this).get(MainViewModel::class.java)
-        modelView.expression.observe(this, Observer {
-            display()
-        })
-
+        display()
     }
 
 
@@ -41,72 +37,58 @@ class MainActivity : AppCompatActivity() {
 
     fun nine(view: View) {
         modelView.nine()
-        display()
     }
 
     fun eight(view: View) {
         modelView.eight()
-        display()
     }
 
     fun seven(view: View) {
         modelView.seven()
-        display()
     }
 
     fun six(view: View) {
         modelView.six()
-        display()
     }
 
     fun five(view: View) {
         modelView.five()
-        display()
     }
 
     fun four(view: View) {
         modelView.four()
-        display()
     }
 
     fun three(view: View) {
         modelView.three()
-        display()
     }
 
     fun two(view: View) {
         modelView.two()
-        display()
     }
 
     fun one(view: View) {
         modelView.one()
-        display()
     }
 
     fun zero(view: View) {
         modelView.zero()
-        display()
     }
 
     fun doubleZero(view: View) {
         modelView.doubleZero()
-        display()
     }
 
     fun point(view: View) {
         modelView.point()
-        display()
     }
 
     fun delete(view: View) {
         modelView.delete()
-        display()
     }
 
     fun result(view: View) {
         modelView.result()
-        display()
     }
 
 
