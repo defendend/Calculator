@@ -15,26 +15,7 @@ class MainViewModel : ViewModel() {
     private var thereIsAPointSecond = false
     private var operation = false
     private var charNumber = 0
-
-    companion object {
-        private const val ZERO: Int = 0
-        private const val ONE_INT: Int = 1
-        private const val EMPTY_STRING = ""
-        private const val ZERO_STRING: String = "0"
-        private const val DOUBLE_ZERO: String = "00"
-        private const val ONE: String = "1"
-        private const val TWO: String = "2"
-        private const val THREE: String = "3"
-        private const val FOUR: String = "4"
-        private const val FIVE: String = "5"
-        private const val SIX: String = "6"
-        private const val SEVEN: String = "7"
-        private const val EIGHT: String = "8"
-        private const val NINE: String = "9"
-        private const val EQ_CHAR = '='
-        private const val POINT: String = "."
-        private val chars: Array<Char> = arrayOf(' ', '+', '-', '÷', '*', '%')
-    }
+    private val chars: Array<Char> = arrayOf(' ', '+', '-', '÷', '*', '%')
 
     init {
         setExpression()
@@ -337,6 +318,26 @@ class MainViewModel : ViewModel() {
             operation = true
         }
     }
+
+    companion object {
+        private const val ZERO: Int = 0
+        private const val ONE_INT: Int = 1
+        private const val EMPTY_STRING = ""
+        private const val ZERO_STRING: String = "0"
+        private const val DOUBLE_ZERO: String = "00"
+        private const val ONE: String = "1"
+        private const val TWO: String = "2"
+        private const val THREE: String = "3"
+        private const val FOUR: String = "4"
+        private const val FIVE: String = "5"
+        private const val SIX: String = "6"
+        private const val SEVEN: String = "7"
+        private const val EIGHT: String = "8"
+        private const val NINE: String = "9"
+        private const val EQ_CHAR = '='
+        private const val POINT: String = "."
+    }
+
 }
 
 
