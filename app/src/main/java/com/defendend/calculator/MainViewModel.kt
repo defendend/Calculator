@@ -311,7 +311,7 @@ class MainViewModel : ViewModel() {
         handleOperation(5)
     }
 
-    fun handleOperation(charNum: Int) {
+    private fun handleOperation(charNum: Int) {
         if (getSecondString().isEmpty()) {
             charNumber = charNum
             setExpression()
