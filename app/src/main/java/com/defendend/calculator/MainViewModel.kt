@@ -5,11 +5,11 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
 
-    val firstNumber = MutableLiveData(Companion.ZERO_STRING)
-    val secondNumber = MutableLiveData("")
     val result = MutableLiveData("")
     val expression = MutableLiveData("")
     val equals = MutableLiveData(false)
+    private val firstNumber = MutableLiveData(ZERO_STRING)
+    private val secondNumber = MutableLiveData("")
     private val calculate = Calculate()
     private var thereIsAPointFirst = false
     private var thereIsAPointSecond = false
@@ -19,12 +19,119 @@ class MainViewModel : ViewModel() {
 
     init {
         setExpression()
-        setResultString(Companion.ZERO_STRING)
+        setResultString(ZERO_STRING)
+    }
+
+    fun nine() {
+        numOperation(NINE)
+    }
+
+    fun eight() {
+        numOperation(EIGHT)
+    }
+
+    fun seven() {
+        numOperation(SEVEN)
+    }
+
+    fun six() {
+        numOperation(SIX)
+    }
+
+    fun five() {
+        numOperation(FIVE)
+    }
+
+    fun four() {
+        numOperation(FOUR)
+    }
+
+    fun three() {
+        numOperation(THREE)
+    }
+
+    fun two() {
+        numOperation(TWO)
+    }
+
+    fun one() {
+        numOperation(ONE)
+    }
+
+    fun zero() {
+        zeroOperation(ZERO_STRING)
+    }
+
+    fun doubleZero() {
+        if (getFirstString().isEmpty()) {
+            updateFirstString(ZERO_STRING)
+        }
+        zeroOperation(DOUBLE_ZERO)
+    }
+
+    fun point() {
+        firstPoint()
+        secondPoint()
+    }
+
+    fun delete() {
+        val stringFirst = getFirstString()
+        val stringSecond = getSecondString()
+        charInFirstString(stringFirst)
+        charInSecondString(stringSecond)
+    }
+
+    fun result() {
+        setEquals(true)
+        setResultString(
+            calculate.calculate(
+                getFirstString().toDoubleOrZero(),
+                getSecondString().toDoubleOrZero(),
+                charNumber
+            )
+        )
+        setExpression()
+        changeFirstString(getResultString())
+        charNumber = ZERO
+        setEquals(false)
+        operation = false
+        changeSecondString(EMPTY_STRING)
+    }
+
+    fun clear() {
+        operation = false
+        setEquals(false)
+        changeFirstString(ZERO_STRING)
+        thereIsAPointFirst = false
+        changeSecondString("")
+        thereIsAPointSecond = false
+        setResultString(ZERO_STRING)
+        setExpression()
+    }
+
+    fun plusNum() {
+        handleOperation(1)
+    }
+
+    fun minusNum() {
+        handleOperation(2)
     }
 
 
+    fun division() {
+        handleOperation(3)
+    }
+
+    fun multiplication() {
+        handleOperation(4)
+    }
+
+    fun percent() {
+        handleOperation(5)
+    }
+
     private fun updateFirstString(string: String) {
-        var str = getFirstString() + string
+        val str = getFirstString() + string
         firstNumber.value = str
         setExpression()
     }
@@ -51,7 +158,7 @@ class MainViewModel : ViewModel() {
     }
 
     private fun updateSecondString(string: String) {
-        var str = getSecondString() + string
+        val str = getSecondString() + string
         secondNumber.value = str
         setExpression()
     }
@@ -81,178 +188,36 @@ class MainViewModel : ViewModel() {
         return this.toDoubleOrNull() ?: 0.0
     }
 
-    fun nine() {
-        if (getFirstString().substring(ZERO) == Companion.ZERO_STRING && !thereIsAPointFirst) {
-            delete()
-        }
-        if (!operation) {
-            updateFirstString(NINE)
-        } else {
-            updateSecondString(NINE)
+    private fun handleOperation(charNum: Int) {
+        if (getSecondString().isEmpty()) {
+            charNumber = charNum
+            setExpression()
+            operation = true
         }
     }
 
-    fun eight() {
-        if (getFirstString().substring(ZERO) == Companion.ZERO_STRING && !thereIsAPointFirst) {
-            delete()
-        }
-        if (!operation) {
-            updateFirstString(EIGHT)
-        } else {
-            updateSecondString(EIGHT)
-        }
-    }
-
-    fun seven() {
-        if (getFirstString().substring(ZERO) == Companion.ZERO_STRING && !thereIsAPointFirst) {
-            delete()
-        }
-        if (!operation) {
-            updateFirstString(SEVEN)
-        } else {
-            updateSecondString(SEVEN)
-        }
-    }
-
-    fun six() {
-        if (getFirstString().substring(ZERO) == Companion.ZERO_STRING && !thereIsAPointFirst) {
-            delete()
-        }
-        if (!operation) {
-            updateFirstString(SIX)
-        } else {
-            updateSecondString(SIX)
-        }
-    }
-
-    fun five() {
-        if (getFirstString().substring(ZERO) == Companion.ZERO_STRING && !thereIsAPointFirst) {
-            delete()
-        }
-        if (!operation) {
-            updateFirstString(FIVE)
-        } else {
-            updateSecondString(FIVE)
-        }
-    }
-
-    fun four() {
-        if (getFirstString().substring(ZERO) == Companion.ZERO_STRING && !thereIsAPointFirst) {
-            delete()
-        }
-        if (!operation) {
-            updateFirstString(FOUR)
-        } else {
-            updateSecondString(FOUR)
-        }
-    }
-
-    fun three() {
-        if (getFirstString().substring(ZERO) == Companion.ZERO_STRING && !thereIsAPointFirst) {
-            delete()
-        }
-        if (!operation) {
-            updateFirstString(THREE)
-        } else {
-            updateSecondString(THREE)
-        }
-    }
-
-    fun two() {
-        if (getFirstString().substring(ZERO) == Companion.ZERO_STRING && !thereIsAPointFirst) {
-            delete()
-        }
-        if (!operation) {
-            updateFirstString(TWO)
-        } else {
-            updateSecondString(TWO)
-        }
-    }
-
-    fun one() {
-        if (getFirstString().substring(ZERO) == Companion.ZERO_STRING && !thereIsAPointFirst) {
-            delete()
-        }
-        if (!operation) {
-            updateFirstString(ONE)
-        } else {
-            updateSecondString(ONE)
-        }
-    }
-
-    fun zero() {
-        if (!operation) {
-            if (getFirstString().substring(ZERO) !== Companion.ZERO_STRING) {
-                updateFirstString(Companion.ZERO_STRING)
-            }
-        } else {
-            if (getSecondString().substring(ZERO) != Companion.ZERO_STRING) {
-                updateSecondString(Companion.ZERO_STRING)
-            }
-        }
-    }
-
-    fun doubleZero() {
-        if (getFirstString().isEmpty()) {
-            updateFirstString(Companion.ZERO_STRING)
-        }
-        if (!operation) {
-            if (getFirstString().substring(ZERO) != Companion.ZERO_STRING) {
-                updateFirstString(DOUBLE_ZERO)
-            }
-        } else {
-            if (getSecondString().substring(ZERO) != Companion.ZERO_STRING) {
-                updateSecondString(DOUBLE_ZERO)
-            }
-        }
-    }
-
-    fun point() {
-        if (!operation) {
-            if (!thereIsAPointFirst) {
-                thereIsAPointFirst = if (getFirstString().isEmpty()) {
-                    updateFirstString(Companion.ZERO_STRING)
-                    updateFirstString(Companion.POINT)
-                    true
-                } else {
-                    updateFirstString(Companion.POINT)
-                    true
-                }
-            }
-        } else {
-            if (!thereIsAPointSecond) {
-                thereIsAPointSecond = if (getSecondString().isEmpty()) {
-                    updateSecondString(Companion.ZERO_STRING)
-                    updateSecondString(Companion.POINT)
-                    true
-                } else {
-                    updateSecondString(Companion.POINT)
-                    true
-                }
-            }
-        }
-    }
-
-    fun delete() {
-        var stringFirst = getFirstString()
-        var stringSecond = getSecondString()
+    private fun charInFirstString(stringFirst: String) {
         if (!operation) {
             if (getFirstString().isNotEmpty()) {
-                if (getFirstString().substring(getFirstString().length - ONE_INT) == Companion.POINT) {
+                if (getFirstString().substring(getFirstString().length - ONE_INT) == POINT) {
                     thereIsAPointFirst = false
                 }
-                stringFirst = stringFirst.dropLast(ONE_INT)
-                changeFirstString(stringFirst)
+                val str = stringFirst.dropLast(ONE_INT)
+                changeFirstString(str)
                 setExpression()
 
             }
-        } else {
+        }
+    }
+
+    private fun charInSecondString(stringSecond: String) {
+        if (operation) {
             if (getSecondString().isNotEmpty()) {
-                if (getSecondString().substring(getSecondString().length - ONE_INT) == Companion.POINT) {
+                if (getSecondString().substring(getSecondString().length - ONE_INT) == POINT) {
                     thereIsAPointSecond = false
                 }
-                stringSecond = stringSecond.dropLast(ONE_INT)
-                changeSecondString(stringSecond)
+                val str = stringSecond.dropLast(ONE_INT)
+                changeSecondString(str)
                 setExpression()
             } else {
                 operation = false
@@ -262,60 +227,56 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun result() {
-        setEquals(true)
-        setResultString(
-            calculate.calculate(
-                getFirstString().toDoubleOrZero(),
-                getSecondString().toDoubleOrZero(),
-                charNumber
-            )
-        )
-        setExpression()
-        changeFirstString(getResultString())
-        charNumber = ZERO
-        setEquals(false)
-        operation = false
-        changeSecondString(EMPTY_STRING)
+    private fun firstPoint() {
+        if (!operation) {
+            if (!thereIsAPointFirst) {
+                thereIsAPointFirst = if (getFirstString().isEmpty()) {
+                    updateFirstString(ZERO_STRING)
+                    updateFirstString(POINT)
+                    true
+                } else {
+                    updateFirstString(POINT)
+                    true
+                }
+            }
+        }
     }
 
-    fun clear() {
-        operation = false
-        setEquals(false)
-        changeFirstString(Companion.ZERO_STRING)
-        thereIsAPointFirst = false
-        changeSecondString("")
-        thereIsAPointSecond = false
-        setResultString(Companion.ZERO_STRING)
-        setExpression()
+    private fun secondPoint() {
+        if (operation) {
+            if (!thereIsAPointSecond) {
+                thereIsAPointSecond = if (getSecondString().isEmpty()) {
+                    updateSecondString(ZERO_STRING)
+                    updateSecondString(POINT)
+                    true
+                } else {
+                    updateSecondString(POINT)
+                    true
+                }
+            }
+        }
     }
 
-    fun plusNum() {
-        handleOperation(1)
+    private fun numOperation(currentValue: String) {
+        if (getFirstString().substring(ZERO) == ZERO_STRING && !thereIsAPointFirst) {
+            delete()
+        }
+        if (!operation) {
+            updateFirstString(currentValue)
+        } else {
+            updateSecondString(currentValue)
+        }
     }
 
-    fun minusNum() {
-        handleOperation(2)
-    }
-
-
-    fun division() {
-        handleOperation(3)
-    }
-
-    fun multiplication() {
-        handleOperation(4)
-    }
-
-    fun percent() {
-        handleOperation(5)
-    }
-
-    private fun handleOperation(charNum: Int) {
-        if (getSecondString().isEmpty()) {
-            charNumber = charNum
-            setExpression()
-            operation = true
+    private fun zeroOperation(currentValue: String) {
+        if (!operation) {
+            if (getFirstString().substring(ZERO) !== ZERO_STRING) {
+                updateFirstString(currentValue)
+            }
+        } else {
+            if (getSecondString().substring(ZERO) != ZERO_STRING) {
+                updateSecondString(currentValue)
+            }
         }
     }
 
