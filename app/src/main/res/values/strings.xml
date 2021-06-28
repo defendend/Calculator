@@ -19,4 +19,9 @@
     <string name="zero">0</string>
     <string name="double_zero">00</string>
     <string name="point">.</string>
+    <string name="advanced">Advanced</string>
+    <string name="result">Рассчитать</string>
+    <string name="piHint">Введите точность расчета числа π</string>
+    <string name="eHint">Введите точность расчета числа e</string>
+
 </resources>
