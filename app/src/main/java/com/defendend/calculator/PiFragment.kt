@@ -75,7 +75,6 @@ class PiFragment : Fragment() {
     private fun getText() {
         viewModel.setAccuracyNumber(piEditText?.text.toString())
         viewModel.setCalculateBoolean(true)
-        viewModel.piNum()
     }
 
     companion object {

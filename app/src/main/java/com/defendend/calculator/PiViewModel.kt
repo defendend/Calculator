@@ -7,6 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
 import kotlin.math.pow
+import kotlin.math.sqrt
 
 class PiViewModel : ViewModel() {
     val piString = MutableLiveData("")
@@ -17,31 +18,11 @@ class PiViewModel : ViewModel() {
     private val iteration = MutableLiveData(0)
     private val summaryBigDecimal = MutableLiveData(BigDecimal(0))
 
-    fun piNum() {
-        viewModelScope.launch(Dispatchers.Default) {
-            var sum = getSummaryBigDecimal()
-            var intNum: Int
-            var intX = 0
-            val numChar = getAccuracyNumber() + 2
-            var i = getIterator()
-            while (getCalculateBoolean() && getPiString().length < numChar) {
-                number = BigDecimal(4.0 / (1 + 2 * i) * (-1.0).pow(1.0 * i))
-                sum = sum.plus(number)
-                intNum = ((100.0 * getPiString().length) / numChar).toInt()
-                setPiString(sum.toString())
-                if (intNum > intX) {
-                    intX = intNum
-                    setPercent(intX)
-                }
-                i++
-            }
-            setIterator(i)
-            setSummaryBigDecimal(sum)
-        }
-    }
-
     fun setCalculateBoolean(boolean: Boolean) {
         calculateBoolean.value = boolean
+        if (boolean){
+            piNum()
+        }
     }
 
     fun getCalculateBoolean(): Boolean {
@@ -50,6 +31,35 @@ class PiViewModel : ViewModel() {
 
     fun setAccuracyNumber(string: String) {
         accuracyNumber.value = string.toInt()
+    }
+
+    private fun piNum() {
+        viewModelScope.launch(Dispatchers.Default) {
+            var sum = getSummaryBigDecimal()
+            var intNum: Int
+            var intX = 0
+            val numChar = getAccuracyNumber() + 2
+            var i = getIterator()
+            var pi = BigDecimal(0)
+            while (getCalculateBoolean() && getPiString().length < numChar) {
+                pi = BigDecimal(sqrt(3.0)).multiply(BigDecimal(2.0* (-1.0).pow(1.0 * i)))
+                number = pi.multiply(BigDecimal(((1.0/(2*i+1))*(1.0/((3.0).pow(1.0*i)))) ))
+                sum = sum.plus(number)
+                intNum = ((100.0 * getPiString().length) / numChar).toInt()
+                if (i%100 == 0) {
+                    setPiString(sum.toString())
+                }
+                if (intNum > intX) {
+                    intX = intNum
+                    setPercent(intX)
+                }
+                i++
+            }
+            setIterator(i)
+            setSummaryBigDecimal(sum)
+            setPiString(sum.toString())
+            setCalculateBoolean(false)
+        }
     }
 
     private fun setSummaryBigDecimal(bigDecimal: BigDecimal) {

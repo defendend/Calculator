@@ -21,6 +21,9 @@ class EViewModel : ViewModel() {
 
     fun setCalculateBoolean(boolean: Boolean) {
         calculateBoolean.value = boolean
+        if (boolean){
+            eNum()
+        }
     }
 
     fun getCalculateBoolean(): Boolean {
@@ -31,7 +34,7 @@ class EViewModel : ViewModel() {
         accuracyNumber.value = string.toInt()
     }
 
-    fun eNum(){
+    private fun eNum(){
         viewModelScope.launch(Dispatchers.Default){
             var sum = getSummaryBigDecimal()
             var intNum: Int
@@ -46,7 +49,9 @@ class EViewModel : ViewModel() {
                 number = fact
                 sum = sum.plus(number)
                 intNum = ((100.0 * getEString().length) / numChar).toInt()
-                setEString(sum.toString())
+                if (n%100 == 0) {
+                    setEString(sum.toString())
+                }
                 if (intNum > intX) {
                     intX = intNum
                     setPercent(intX)
@@ -55,6 +60,7 @@ class EViewModel : ViewModel() {
             }
             setIterator(n)
             setSummaryBigDecimal(sum)
+            setEString(sum.toString())
             setCalculateBoolean(false)
         }
     }

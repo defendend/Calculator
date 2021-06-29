@@ -76,7 +76,6 @@ class EFragment : Fragment() {
     private fun getText() {
         viewModel.setAccuracyNumber(eEditText?.text.toString())
         viewModel.setCalculateBoolean(true)
-        viewModel.eNum()
     }
 
     companion object {
