@@ -20,7 +20,7 @@ class EViewModel : ViewModel() {
     private val summaryBigDecimal = MutableLiveData(BigDecimal(1))
 
     fun setCalculateBoolean(boolean: Boolean) {
-        calculateBoolean.value = boolean
+        calculateBoolean.postValue(boolean)
         if (boolean){
             eNum()
         }

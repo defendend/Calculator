@@ -19,7 +19,7 @@ class PiViewModel : ViewModel() {
     private val summaryBigDecimal = MutableLiveData(BigDecimal(0))
 
     fun setCalculateBoolean(boolean: Boolean) {
-        calculateBoolean.value = boolean
+        calculateBoolean.postValue(boolean)
         if (boolean){
             piNum()
         }
