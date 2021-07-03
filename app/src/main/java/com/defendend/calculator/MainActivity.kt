@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         initObserves()
     }
 
-    fun advanced(view: View) {
+    fun onAdvancedClicked(view: View) {
         val intent = Intent(this@MainActivity, ActivityTwo::class.java)
         startActivity(intent)
     }

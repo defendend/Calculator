@@ -23,5 +23,10 @@
     <string name="result">Рассчитать</string>
     <string name="piHint">Введите точность расчета числа π</string>
     <string name="eHint">Введите точность расчета числа e</string>
-
+    <string name="pi">Число ПИ</string>
+    <string name="e">Число Е</string>
+    <string name="percent_pattern">%s %%</string>
+    <string name="start">Рассчитать</string>
+    <string name="stop">Остановить</string>
+    <string name="end">Расчет закончен</string>
 </resources>

@@ -10,18 +10,18 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class ActivityTwo : AppCompatActivity() {
 
-    private val workPager: ViewPager2 by lazy { findViewById(R.id.pager) }
+    private val viewPager: ViewPager2 by lazy { findViewById(R.id.pager) }
     private val tabLayout: TabLayout by lazy { findViewById(R.id.tab_layout) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.two_activity)
-        workPager.adapter = WorkDetailsAdapter(this)
-        workPager.currentItem = TASK_PAGE
-        val tabLayoutMediator = TabLayoutMediator(tabLayout, workPager) { tab, position ->
+        viewPager.adapter = FragmentAdapter(this)
+        viewPager.currentItem = PI_PAGE
+        val tabLayoutMediator = TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             val title = when (position) {
-                TASK_PAGE -> "Число ПИ"
-                SECOND_PAGE -> "Число Е"
+                PI_PAGE -> getString(R.string.pi)
+                E_PAGE -> getString(R.string.e)
                 else -> ""
             }
             tab.text = title
@@ -31,7 +31,7 @@ class ActivityTwo : AppCompatActivity() {
     }
 
     companion object {
-        private const val TASK_PAGE = 0
-        private const val SECOND_PAGE = 1
+        private const val PI_PAGE = 0
+        private const val E_PAGE = 1
     }
 }

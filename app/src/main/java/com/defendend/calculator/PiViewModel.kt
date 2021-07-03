@@ -10,38 +10,39 @@ import kotlin.math.pow
 import kotlin.math.sqrt
 
 class PiViewModel : ViewModel() {
+
     val piString = MutableLiveData("")
     val percent = MutableLiveData(0)
-    val calculateBoolean = MutableLiveData(false)
+    val isCalculating = MutableLiveData(false)
     private var number = BigDecimal(0.0)
-    private val accuracyNumber = MutableLiveData(0)
-    private val iteration = MutableLiveData(0)
-    private val summaryBigDecimal = MutableLiveData(BigDecimal(0))
+    private var accuracyNumber : Int = 0
+    private var iteration : Int = 0
+    private var summaryBigDecimal = BigDecimal(0)
 
-    fun setCalculateBoolean(boolean: Boolean) {
-        calculateBoolean.postValue(boolean)
-        if (boolean){
-            piNum()
+    fun setIsCalculating(isCalculate: Boolean) {
+        isCalculating.postValue(isCalculate)
+        if (isCalculate){
+            calculateNumber()
         }
     }
 
-    fun getCalculateBoolean(): Boolean {
-        return calculateBoolean.value ?: false
+    fun getIsCalculating(): Boolean {
+        return isCalculating.value ?: false
     }
 
-    fun setAccuracyNumber(string: String) {
-        accuracyNumber.value = string.toInt()
+    fun setAccuracyNumber(numberEditText: String) {
+        accuracyNumber = numberEditText.toInt()
     }
 
-    private fun piNum() {
+    private fun calculateNumber() {
         viewModelScope.launch(Dispatchers.Default) {
-            var sum = getSummaryBigDecimal()
+            var sum = summaryBigDecimal
             var intNum: Int
             var intX = 0
-            val numChar = getAccuracyNumber() + 2
-            var i = getIterator()
+            val numChar = accuracyNumber + 2
+            var i = iteration
             var pi = BigDecimal(0)
-            while (getCalculateBoolean() && getPiString().length < numChar) {
+            while (getIsCalculating() && getPiString().length < numChar) {
                 pi = BigDecimal(sqrt(3.0)).multiply(BigDecimal(2.0* (-1.0).pow(1.0 * i)))
                 number = pi.multiply(BigDecimal(((1.0/(2*i+1))*(1.0/((3.0).pow(1.0*i)))) ))
                 sum = sum.plus(number)
@@ -55,27 +56,11 @@ class PiViewModel : ViewModel() {
                 }
                 i++
             }
-            setIterator(i)
-            setSummaryBigDecimal(sum)
+            iteration = i
+            summaryBigDecimal = sum
             setPiString(sum.toString())
-            setCalculateBoolean(false)
+            setIsCalculating(false)
         }
-    }
-
-    private fun setSummaryBigDecimal(bigDecimal: BigDecimal) {
-        summaryBigDecimal.postValue(bigDecimal)
-    }
-
-    private fun getSummaryBigDecimal(): BigDecimal {
-        return summaryBigDecimal.value ?: BigDecimal(0)
-    }
-
-    private fun setIterator(int: Int) {
-        iteration.postValue(int)
-    }
-
-    private fun getIterator(): Int {
-        return iteration.value ?: 0
     }
 
     private fun setPiString(string: String) {
@@ -88,9 +73,5 @@ class PiViewModel : ViewModel() {
 
     private fun setPercent(int: Int) {
         percent.postValue(int)
-    }
-
-    private fun getAccuracyNumber(): Int {
-        return accuracyNumber.value ?: 0
     }
 }

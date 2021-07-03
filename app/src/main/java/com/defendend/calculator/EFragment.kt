@@ -38,50 +38,44 @@ class EFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         buttonE?.setOnClickListener {
-            if (viewModel.getCalculateBoolean()) {
-                viewModel.setCalculateBoolean(false)
+            if (viewModel.getIsCalculating()) {
+                viewModel.setIsCalculating(false)
                 Snackbar.make(
                     view,
-                    SNACK_STRING,
+                    R.string.end,
                     Snackbar.LENGTH_LONG
                 ).show()
             } else {
-                getText()
+                startCalculation()
             }
         }
-        viewModel.calculateBoolean.observe(viewLifecycleOwner) {
-            visibleView(it)
+        viewModel.isCalculating.observe(viewLifecycleOwner) {
+            handleCalculation(it)
         }
         viewModel.eString.observe(viewLifecycleOwner) {
             eTextView?.text = it
         }
         viewModel.percent.observe(viewLifecycleOwner) {
             pbHorizontalE?.secondaryProgress = it
-            tvProgressHorizontalE?.text = "$it %"
+            tvProgressHorizontalE?.text =
+                context?.getString(R.string.percent_pattern, it.toString())
         }
     }
 
-    private fun visibleView(boolean: Boolean) {
-        if (boolean) {
+    private fun handleCalculation(isCalculating: Boolean) {
+        if (isCalculating) {
             pbHorizontalE?.visibility = View.VISIBLE
             tvProgressHorizontalE?.visibility = View.VISIBLE
-            buttonE?.text = STOP_STRING
+            buttonE?.text = getString(R.string.stop)
         } else {
             pbHorizontalE?.visibility = View.INVISIBLE
             tvProgressHorizontalE?.visibility = View.INVISIBLE
-            buttonE?.text = START_STRING
+            buttonE?.text = getString(R.string.start)
         }
     }
 
-    private fun getText() {
+    private fun startCalculation() {
         viewModel.setAccuracyNumber(eEditText?.text.toString())
-        viewModel.setCalculateBoolean(true)
+        viewModel.setIsCalculating(true)
     }
-
-    companion object {
-        private const val START_STRING = "Рассчитать"
-        private const val STOP_STRING = "Остановить"
-        private const val SNACK_STRING = "Рассчет закончен"
-    }
-
 }

@@ -37,49 +37,43 @@ class PiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         buttonPi?.setOnClickListener {
-            if (viewModel.getCalculateBoolean()) {
-                viewModel.setCalculateBoolean(false)
+            if (viewModel.getIsCalculating()) {
+                viewModel.setIsCalculating(false)
                 Snackbar.make(
                     view,
-                    SNACK_STRING,
+                    R.string.end,
                     Snackbar.LENGTH_LONG
                 ).show()
             } else {
-                getText()
+                startCalculation()
             }
         }
-        viewModel.calculateBoolean.observe(viewLifecycleOwner) {
-            visibleView(it)
+        viewModel.isCalculating.observe(viewLifecycleOwner) {
+            handleCalculation(it)
         }
         viewModel.piString.observe(viewLifecycleOwner) {
             piTextView?.text = it
         }
         viewModel.percent.observe(viewLifecycleOwner) {
             pbHorizontal?.secondaryProgress = it
-            tvProgressHorizontal?.text = "$it %"
+            tvProgressHorizontal?.text = context?.getString(R.string.percent_pattern, it.toString())
         }
     }
 
-    private fun visibleView(boolean: Boolean) {
-        if (boolean) {
+    private fun handleCalculation(isCalculating: Boolean) {
+        if (isCalculating) {
             pbHorizontal?.visibility = View.VISIBLE
             tvProgressHorizontal?.visibility = View.VISIBLE
-            buttonPi?.text = STOP_STRING
+            buttonPi?.text = getString(R.string.stop)
         } else {
             pbHorizontal?.visibility = View.INVISIBLE
             tvProgressHorizontal?.visibility = View.INVISIBLE
-            buttonPi?.text = START_STRING
+            buttonPi?.text = getString(R.string.start)
         }
     }
 
-    private fun getText() {
+    private fun startCalculation() {
         viewModel.setAccuracyNumber(piEditText?.text.toString())
-        viewModel.setCalculateBoolean(true)
-    }
-
-    companion object {
-        private const val START_STRING = "Рассчитать"
-        private const val STOP_STRING = "Остановить"
-        private const val SNACK_STRING = "Рассчет закончен"
+        viewModel.setIsCalculating(true)
     }
 }

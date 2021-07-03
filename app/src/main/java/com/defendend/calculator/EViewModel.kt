@@ -13,43 +13,43 @@ class EViewModel : ViewModel() {
 
     val eString = MutableLiveData("")
     val percent = MutableLiveData(0)
-    val calculateBoolean = MutableLiveData(false)
+    val isCalculating = MutableLiveData(false)
+    private var iteration: Int = 1
     private var number = BigDecimal(1)
-    private val accuracyNumber = MutableLiveData(0)
-    private val iteration = MutableLiveData(1)
-    private val summaryBigDecimal = MutableLiveData(BigDecimal(1))
+    private var summaryBigDecimal = BigDecimal(1)
+    private var accuracyNumber : Int = 0
 
-    fun setCalculateBoolean(boolean: Boolean) {
-        calculateBoolean.postValue(boolean)
-        if (boolean){
-            eNum()
+    fun setIsCalculating(boolean: Boolean) {
+        isCalculating.postValue(boolean)
+        if (boolean) {
+            calculateNumber()
         }
     }
 
-    fun getCalculateBoolean(): Boolean {
-        return calculateBoolean.value ?: false
+    fun getIsCalculating(): Boolean {
+        return isCalculating.value ?: false
     }
 
-    fun setAccuracyNumber(string: String) {
-        accuracyNumber.value = string.toInt()
+    fun setAccuracyNumber(numberEditText: String) {
+        accuracyNumber = numberEditText.toInt()
     }
 
-    private fun eNum(){
-        viewModelScope.launch(Dispatchers.Default){
-            var sum = getSummaryBigDecimal()
+    private fun calculateNumber() {
+        viewModelScope.launch(Dispatchers.Default) {
+            var sum = summaryBigDecimal
             var intNum: Int
             var intX = 0
-            val numChar = getAccuracyNumber() + 2
-            var n = getIterator()
-            while (getCalculateBoolean() && getEString().length < numChar) {
+            val numChar = accuracyNumber + 2
+            var n = iteration
+            while (getIsCalculating() && getEString().length < numChar) {
                 var fact = BigDecimal(1)
-                for (i in 1..n){
-                    fact = fact.multiply(BigDecimal(1.0/i))
+                for (i in 1..n) {
+                    fact = fact.multiply(BigDecimal(1.0 / i))
                 }
                 number = fact
                 sum = sum.plus(number)
                 intNum = ((100.0 * getEString().length) / numChar).toInt()
-                if (n%100 == 0) {
+                if (n % 100 == 0) {
                     setEString(sum.toString())
                 }
                 if (intNum > intX) {
@@ -58,43 +58,22 @@ class EViewModel : ViewModel() {
                 }
                 n++
             }
-            setIterator(n)
-            setSummaryBigDecimal(sum)
+            iteration = n
+            summaryBigDecimal = sum
             setEString(sum.toString())
-            setCalculateBoolean(false)
+            setIsCalculating(false)
         }
     }
 
-    private fun setEString(string: String){
+    private fun setEString(string: String) {
         eString.postValue(string)
     }
 
-    private fun getEString() : String{
+    private fun getEString(): String {
         return eString.value.toString()
-    }
-
-    private fun setSummaryBigDecimal(bigDecimal: BigDecimal) {
-        summaryBigDecimal.postValue(bigDecimal)
-    }
-
-    private fun getSummaryBigDecimal(): BigDecimal {
-        return summaryBigDecimal.value ?: BigDecimal(0)
-    }
-
-    private fun setIterator(int: Int) {
-        iteration.postValue(int)
-    }
-
-    private fun getIterator(): Int {
-        return iteration.value ?: 0
     }
 
     private fun setPercent(int: Int) {
         percent.postValue(int)
     }
-
-    private fun getAccuracyNumber(): Int {
-        return accuracyNumber.value ?: 0
-    }
-
 }

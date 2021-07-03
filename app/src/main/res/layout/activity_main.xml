@@ -27,7 +27,7 @@
                 android:textSize="@dimen/textSize_24sp"
                 android:text="@string/advanced"
                 android:layout_marginBottom="8dp"
-                android:onClick="advanced"/>
+                android:onClick="onAdvancedClicked"/>
 
             <TextView
                 android:id="@+id/expression_text"
