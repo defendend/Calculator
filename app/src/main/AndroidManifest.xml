@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ActivityTwo"
+            android:label="Вторая активность"
+            android:theme="@style/Theme.Calculator">
+        </activity>
     </application>
 
 </manifest>

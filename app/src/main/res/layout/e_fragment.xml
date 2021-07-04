@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/pb_horizontal_e"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="@dimen/spacing_big">
+
+        <TextView
+            android:id="@+id/e_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=""
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </ScrollView>
+
+
+    <Button
+        android:id="@+id/button_e"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/result"
+        android:textSize="@dimen/textSize_24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="16dp"
+        android:layout_marginBottom="@dimen/spacing_big"
+        android:layout_marginEnd="@dimen/spacing_big"
+        android:layout_marginStart="@dimen/spacing_big"/>
+
+    <EditText
+        android:id="@+id/e_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_big"
+        android:layout_marginEnd="@dimen/spacing_big"
+        android:hint="@string/eHint"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/button_e"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_horizontal_e"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/spacing_big"
+        android:layout_marginEnd="@dimen/spacing_big"
+        android:max="100"
+        app:layout_constraintBottom_toTopOf="@+id/e_edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_progress_horizontal_e"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/pb_horizontal_e"
+        android:layout_marginStart="@dimen/spacing_big"
+        android:layout_marginEnd="@dimen/spacing_big"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/e_edit_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
